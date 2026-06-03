@@ -49,7 +49,7 @@ export default function App() {
   const onOperator = (op: Operator) => () => calc.chooseOperator(op);
 
   return (
-    <div className="bg-neutral-950 text-neutral-50 min-h-[100dvh] w-full max-w-lg mx-auto overflow-hidden">
+    <div className="bg-neutral-950 text-neutral-50 min-h-[100dvh] w-full overflow-hidden">
       <div className="min-h-[100dvh] flex px-5 pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] flex-col gap-6">
         <header className="flex justify-between items-center shrink-0">
           <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ export default function App() {
           </div>
         </header>
 
-        <Card className="shadow-2xl rounded-3xl bg-neutral-900 border-white/10 border border-solid p-5 sm:p-6 gap-6 flex-1 flex flex-col">
+        <Card className="shadow-2xl rounded-3xl bg-neutral-900 border-0 p-5 sm:p-6 gap-6 flex-1 flex flex-col">
           <CardContent className="flex p-0 flex-col gap-5 flex-1">
             <div
               className="min-h-[140px] sm:min-h-[160px] rounded-2xl bg-neutral-800 flex p-5 sm:p-6 flex-col justify-end items-end gap-2 overflow-hidden"
@@ -162,7 +162,7 @@ export default function App() {
 
         <p className="text-[#a1a1a1] text-xs leading-4 flex justify-center items-center gap-2 shrink-0">
           <Clock className="size-3.5 shrink-0" aria-hidden />
-          <span>ইতিহাস দেখতে History আইকনে ট্যাপ করুন</span>
+          <span>Tap the history icon to view recent calculations</span>
         </p>
       </div>
 
@@ -175,7 +175,7 @@ export default function App() {
           onClick={() => calc.setShowHistory(false)}
         >
           <div
-            className="bg-neutral-900 rounded-t-3xl border-t border-white/10 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] max-h-[70dvh] flex flex-col gap-4 animate-in slide-in-from-bottom duration-300"
+            className="bg-neutral-900 rounded-t-3xl border-0 p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] max-h-[70dvh] flex flex-col gap-4 animate-in slide-in-from-bottom duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center">
@@ -207,7 +207,7 @@ export default function App() {
             <ul className="overflow-y-auto flex flex-col gap-2 -mx-1 px-1">
               {calc.history.length === 0 ? (
                 <li className="text-[#a1a1a1] text-sm py-8 text-center">
-                  এখনও কোনো হিসাব নেই
+                  No calculations yet
                 </li>
               ) : (
                 calc.history.map((entry) => (
