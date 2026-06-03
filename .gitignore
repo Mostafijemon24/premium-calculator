@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# IDE / OS
+.idea/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+
+# Android (machine-specific)
+android/local.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/capacitor-cordova-android-plugins/
+
+# Capacitor copied assets (regenerated on sync)
+android/app/src/main/assets/public/
+
+# APK (built locally or via CI)
+*.apk
+*.aab
+
+# Gradle cache
+.gradle/
