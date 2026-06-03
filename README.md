@@ -1,4 +1,4 @@
-# Premium Calculator
+# Calculator
 
 Screen 1 ডিজাইনের মতো প্রিমিয়াম ডার্ক UI সহ সাধারণ মোবাইল ক্যালকুলেটর। React + Vite + Capacitor দিয়ে Android APK তৈরি করা যায়।
 
@@ -10,7 +10,7 @@ Screen 1 ডিজাইনের মতো প্রিমিয়াম ডা�
 
    [github.com/Mostafijemon24/premium-calculator/releases/latest](https://github.com/Mostafijemon24/premium-calculator/releases/latest)
 
-4. **PremiumCalculator.apk** ডাউনলোড → ইনস্টল করুন  
+4. **Calculator.apk** ডাউনলোড → ইনস্টল করুন  
 
 [![Download APK](https://img.shields.io/github/v/release/Mostafijemon24/premium-calculator?label=Download%20APK)](https://github.com/Mostafijemon24/premium-calculator/releases/latest)
 

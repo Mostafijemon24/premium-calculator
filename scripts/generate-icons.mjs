@@ -9,8 +9,8 @@ const source = path.join(root, "assets", "app-icon-source.png");
 const resDir = path.join(root, "android", "app", "src", "main", "res");
 const publicDir = path.join(root, "public");
 
-/** Dark purple matching icon backdrop (adaptive icon background). */
-const BG = { r: 15, g: 8, b: 28, alpha: 1 };
+/** Dark grey matching flat icon backdrop (adaptive icon background). */
+const BG = { r: 58, g: 58, b: 58, alpha: 1 };
 
 const densities = {
   "mipmap-mdpi": { launcher: 48, foreground: 108 },
