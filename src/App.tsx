@@ -1,18 +1,17 @@
-import { Calculator, Clock, Delete, History, X } from "lucide-react";
+import { Clock, Delete, History, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { useCalculator } from "@/hooks/useCalculator";
 import { cn } from "@/lib/utils";
 import type { Operator } from "@/lib/calculator";
 
 const OP_CLASS =
-  "bg-[oklch(0.488_0.243_264.376/0.25)] text-[oklch(0.696_0.17_283)] font-semibold rounded-2xl text-2xl leading-8 h-16";
+  "bg-[oklch(0.488_0.243_264.376/0.25)] text-[oklch(0.696_0.17_283)] font-semibold rounded-2xl text-2xl leading-8 h-full min-h-14";
 const CLEAR_CLASS =
-  "bg-[oklch(0.704_0.191_22.216/0.15)] font-semibold rounded-2xl text-[#ff6467] text-lg leading-7 h-16";
+  "bg-[oklch(0.704_0.191_22.216/0.15)] font-semibold rounded-2xl text-[#ff6467] text-lg leading-7 h-full min-h-14";
 const NUM_CLASS =
-  "font-medium rounded-2xl bg-neutral-800 text-neutral-50 text-xl leading-7 h-16";
+  "font-medium rounded-2xl bg-neutral-800 text-neutral-50 text-xl leading-7 h-full min-h-14";
 const PERCENT_CLASS =
-  "bg-[oklch(0.769_0.188_70.08/0.15)] text-[oklch(0.769_0.188_70.08)] font-semibold rounded-2xl text-lg leading-7 h-16";
+  "bg-[oklch(0.769_0.188_70.08/0.15)] text-[oklch(0.769_0.188_70.08)] font-semibold rounded-2xl text-lg leading-7 h-full min-h-14";
 
 function displayTextSize(value: string): string {
   const len = value.replace(/,/g, "").length;
@@ -49,62 +48,63 @@ export default function App() {
   const onOperator = (op: Operator) => () => calc.chooseOperator(op);
 
   return (
-    <div className="bg-neutral-950 text-neutral-50 min-h-[100dvh] w-full overflow-hidden">
-      <div className="min-h-[100dvh] flex px-5 pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] flex-col gap-6">
-        <header className="flex justify-between items-center shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="size-9 rounded-xl bg-neutral-200 text-neutral-900 flex justify-center items-center shadow-lg shadow-white/5">
-              <Calculator className="size-5" aria-hidden />
-            </div>
-            <span className="font-semibold text-base leading-6 tracking-tight">
-              Calculator
+    <div className="bg-neutral-950 text-neutral-50 min-h-[100dvh] w-full overflow-hidden flex flex-col">
+      <header className="w-full flex justify-between items-center shrink-0 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3">
+        <div className="flex items-center gap-2.5">
+          <img
+            src="/app-icon.png"
+            alt=""
+            width={36}
+            height={36}
+            className="size-9 rounded-xl shrink-0"
+            aria-hidden
+          />
+          <span className="font-semibold text-base leading-6 tracking-tight">
+            Calculator
+          </span>
+        </div>
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className={cn(
+            "size-9 rounded-full text-[#a1a1a1]",
+            calc.showHistory && "bg-white/10 text-neutral-50",
+          )}
+          onClick={() => calc.setShowHistory(true)}
+          aria-label="History"
+        >
+          <History className="size-4" />
+        </Button>
+      </header>
+
+      <main className="w-full flex-1 flex flex-col min-h-0">
+        <div
+          className="w-full flex-1 min-h-[120px] flex px-4 flex-col justify-end items-end gap-2 overflow-hidden border-b border-white/5"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          {calc.expression ? (
+            <span className="tabular-nums font-medium text-[#a1a1a1] text-sm leading-5 truncate w-full text-right">
+              {calc.expression}
             </span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className={cn(
-                "size-9 rounded-full text-[#a1a1a1]",
-                calc.showHistory && "bg-white/10 text-neutral-50",
-              )}
-              onClick={() => calc.setShowHistory(true)}
-              aria-label="History"
-            >
-              <History className="size-4" />
-            </Button>
-          </div>
-        </header>
+          ) : (
+            <span className="tabular-nums font-medium text-[#a1a1a1]/40 text-sm leading-5">
+              &nbsp;
+            </span>
+          )}
+          <span
+            className={cn(
+              "tabular-nums font-semibold text-neutral-50 tracking-tight truncate w-full text-right transition-[font-size] duration-150",
+              displayTextSize(calc.display),
+              calc.display === "Error" && "text-[#ff6467]",
+            )}
+          >
+            {calc.display}
+          </span>
+        </div>
 
-        <Card className="shadow-2xl rounded-3xl bg-neutral-900 border-0 p-5 sm:p-6 gap-6 flex-1 flex flex-col">
-          <CardContent className="flex p-0 flex-col gap-5 flex-1">
-            <div
-              className="min-h-[140px] sm:min-h-[160px] rounded-2xl bg-neutral-800 flex p-5 sm:p-6 flex-col justify-end items-end gap-2 overflow-hidden"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              {calc.expression ? (
-                <span className="tabular-nums font-medium text-[#a1a1a1] text-sm leading-5 truncate max-w-full text-right">
-                  {calc.expression}
-                </span>
-              ) : (
-                <span className="tabular-nums font-medium text-[#a1a1a1]/40 text-sm leading-5">
-                  &nbsp;
-                </span>
-              )}
-              <span
-                className={cn(
-                  "tabular-nums font-semibold text-neutral-50 tracking-tight truncate max-w-full text-right transition-[font-size] duration-150",
-                  displayTextSize(calc.display),
-                  calc.display === "Error" && "text-[#ff6467]",
-                )}
-              >
-                {calc.display}
-              </span>
-            </div>
-
-            <div className="grid grid-cols-4 gap-3 sm:gap-4 mt-auto">
+        <div className="w-full grid grid-cols-4 grid-rows-5 gap-2 px-2 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] flex-1 min-h-0 auto-rows-fr">
               <CalcButton label="AC" className={CLEAR_CLASS} onClick={calc.clearAll} />
               <CalcButton
                 label={<Delete className="size-5" />}
@@ -153,18 +153,16 @@ export default function App() {
               <CalcButton label="." className={NUM_CLASS} onClick={calc.inputDecimal} />
               <CalcButton
                 label="="
-                className="font-bold rounded-2xl bg-neutral-200 text-neutral-900 text-2xl leading-8 h-16"
+                className="font-bold rounded-2xl bg-neutral-200 text-neutral-900 text-2xl leading-8 h-full min-h-14"
                 onClick={calc.equals}
               />
-            </div>
-          </CardContent>
-        </Card>
+        </div>
+      </main>
 
-        <p className="text-[#a1a1a1] text-xs leading-4 flex justify-center items-center gap-2 shrink-0">
-          <Clock className="size-3.5 shrink-0" aria-hidden />
-          <span>Tap the history icon to view recent calculations</span>
-        </p>
-      </div>
+      <p className="text-[#a1a1a1] text-xs leading-4 flex justify-center items-center gap-2 shrink-0 px-4 pb-2">
+        <Clock className="size-3.5 shrink-0" aria-hidden />
+        <span>Tap the history icon to view recent calculations</span>
+      </p>
 
       {calc.showHistory && (
         <div
